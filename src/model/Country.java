@@ -10,15 +10,41 @@ import structures.*;
 public class Country {
 	
 	private String name;
-	private String countryIn;
-	private String countryOut;
+	private int id;
 	private static AdjacencyList<City> graphCity;
 	private static ArrayList<City> cities;
 	
-	public Country(String name, String countryIn, String countryOut) {
+	public Country(String name, int id) {
 		this.name = name;
-		this.countryIn = countryIn;
-		this.countryOut = countryOut;
+		this.id = id;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the cities
+	 */
+	public static ArrayList<City> getCities() {
+		return cities;
+	}
+
+	/**
+	 * @param cities the cities to set
+	 */
+	public static void setCities(ArrayList<City> cities) {
+		Country.cities = cities;
 	}
 
 	/**
@@ -38,34 +64,10 @@ public class Country {
 	/**
 	 * @return the countryIn
 	 */
-	public String getCountryIn() {
-		return countryIn;
-	}
-
-	/**
-	 * @param countryIn the countryIn to set
-	 */
-	public void setCountryIn(String countryIn) {
-		this.countryIn = countryIn;
-	}
-
-	/**
-	 * @return the countryOut
-	 */
-	public String getCountryOut() {
-		return countryOut;
-	}
-
-	/**
-	 * @param countryOut the countryOut to set
-	 */
-	public void setCountryOut(String countryOut) {
-		this.countryOut = countryOut;
-	}
 
 	@Override
 	public String toString() {
-		return "Name: "+name+", Incoming countries: "+countryIn+", Outcoming countries: "+countryOut;
+		return "Name: "+name+", Id: "+id;
 	}
 	
 	public ArrayList<City> load(String path) {
@@ -107,17 +109,22 @@ public class Country {
 		}
 		String all = "";
 		if(nameCountry.equals("Colombia")) {
-			all = "";
+			all = "Cali-Barranquilla,Cali-Medellin,Cali-Bogota,Barranquilla-Bogota,Barranquilla-Medellin,"+
+			"Barranquilla-Cartagena,Medellin-Bogota,Medellin-Cartagena";
 		}else if(nameCountry.equals("Argentina")) {
-			all = "";
+			all = "Buenos aires-Cordoba,Buenos aires-La plata,Buenos aires-San miguel de tucuman,Cordoba-La plata,"+
+			"Rosario-Cordoba,Rosario-San miguel de tucuman,Rosario-La plata,";
 		}else if(nameCountry.equals("Chile")) {
-			all = "";
+			all = "Santiago-Gran valparaiso,Santiago-Antofagasta,Santiago-Gran la serena,Gran valparaiso-Gran concepcion,"+
+			"Gran valparaiso-Antofagasta,Gran concepcion-Gran la serena";
 		}else if(nameCountry.equals("Peru")) {
-			all = "";
+			all = "Iquitos-Lima,Iquitos-Arequipa,Iquitos-Puno,Cuzco-Lima,Cuzco-Puno,Arequipa-Puno,Arequipa-Lima,Puno-Lima";
 		}else if(nameCountry.equals("Brasil")) {
-			all = "";
-		}else if(nameCountry.equals("Uruguay")) {
-			all = "";
+			all = "Sao paulo-Rio de janeiro,Sao paulo-Brasilia,Sao paulo-Belo horizonte,Brasilia-Belo horizonte,"+
+			"Brasilia-Salvador de bahia,Brasilia-Rio de janeiro";
+		}else if(nameCountry.equals("Costa Rica")) {
+			all = "Heredia-Cartago,Heredia-Guanacaste,Heredia-Alajuela,Heredia-San jose,Cartago-Guanacaste"+
+			"San jose-Alajuela,San jose-Cartago";
 		}
 		
 		String[] relations = all.split(",");

@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import model.City;
 import model.Country;
+import model.Manage;
 
 
 public class WindowController {
@@ -74,16 +75,16 @@ public class WindowController {
     
     
     
-    ArrayList<City> cities;
+    ArrayList<Country> countries;
 	ObservableList<String> names;
-	Country country;
+	Manage manage;
     
     
     public void initializable() {
     	
-    	cities = new ArrayList();
+    	countries = new ArrayList();
     	
-    	country = new Country(null, null, null);
+    	manage = new Manage();
     	cbDepartureCity.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -112,11 +113,11 @@ public class WindowController {
 	void loadFileData(ActionEvent event) {
 		try {
 			String path = tfPath1.getText();
-			cities = country.load(path);
+			countries = manage.load(path);
 			String info = "";
-			for (int i = 0; i < cities.size(); i++) {
-				info += cities.get(i).toString() + "\n";
-				names.add(cities.get(i).getName());
+			for (int i = 0; i < countries.size(); i++) {
+				info += countries.get(i).toString() + "\n";
+				names.add(countries.get(i).getName());
 			}
 			txtInfo1.setText(info);
 			cbDepartureCity.getItems().addAll(names);
