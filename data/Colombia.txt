@@ -1,0 +1,6 @@
+Cali,Colombia
+Medellin,Colombia
+Bogota,Colombia
+Cartagena,Colombia
+Barranquilla,Colombia
+Medellin,Colombia

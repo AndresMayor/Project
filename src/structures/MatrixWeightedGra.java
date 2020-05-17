@@ -142,4 +142,29 @@ public class MatrixWeightedGra<V> implements Graph<V> {
 		return (vertices.size() != 0)? Algorithms.dfs(this, invVertices.get(0)) : null;
 	}
 
+
+	@Override
+	public boolean isDirected() {
+		return isDirected;
+	}
+
+	@Override
+	public boolean addEdge(V v, V u, int w) {
+		int posv = vertices.get(v);
+		int posu = vertices.get(u);
+		
+		Weight[posv][posu] = w;
+		
+		if(!isDirected) Weight[posu][posv] = w;
+		
+		return true;
+	}
+	@Override
+	public boolean areConnected(V v, V u) {
+		int posv = vertices.get(v);
+		int posu = vertices.get(u);
+		
+		return (Weight[posv][posu] != Integer.MAX_VALUE && posu != posv)? true : false;
+	}
+
 }

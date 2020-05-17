@@ -30,6 +30,10 @@ public class AdjacencyList <V> implements Graph<V> {
 		vertices = new HashMap<V, Integer>();
 		weightedMatrix = new int[18][18];
 	}
+	@Override
+	public boolean isDirected() {
+		return isDirected;
+	}
 	
 	@Override
 	public List<V> bfs(V v) {
@@ -130,6 +134,33 @@ public class AdjacencyList <V> implements Graph<V> {
 	}
 
 
+	@Override
+	public boolean addEdge(V v, V u, int w) {
+		int pos = vertices.get(v);
+		List<Duplex<V, Integer>> trans = adjacencyList.get(pos);
+
+		trans.add(new Duplex<V, Integer>(u, w));
+
+		if (!isDirected) {
+			pos = vertices.get(u);
+			trans = adjacencyList.get(pos);
+
+			trans.add(new Duplex<V, Integer>(v, w));
+		}
+
+		return true;
+	}
+	
+	public boolean areConnected(V v, V u) {
+		List<Duplex<V, Integer>> ad = adjacencyList.get(vertices.get(v));
+
+		for (int i = 0; i < ad.size(); i++) {
+			if (ad.get(i).getE1().equals(u))
+				return true;
+		}
+
+		return false;
+	}
 
 	@Override
 	public boolean direct() {

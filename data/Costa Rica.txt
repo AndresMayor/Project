@@ -1,0 +1,5 @@
+San josé,Costa Rica
+Alajuela,Costa Rica
+Cartago,Costa Rica
+Heredia,Costa Rica
+Guanacaste,Costa Rica

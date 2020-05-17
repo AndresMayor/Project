@@ -33,6 +33,12 @@ public interface Graph<V> {
 	public int[] dijkstra(V v);
 	
 	public int[][] floydWarshall();
+
+	boolean addEdge(V v, V u, int w);
+
+	boolean isDirected();
+
+	boolean areConnected(V v, V u);
 	
 	
 

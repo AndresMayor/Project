@@ -1,0 +1,5 @@
+Lima,Peru
+Cuzco,Peru
+Iquitos,Peru
+Arequipa,Peru
+Puno,Peru
