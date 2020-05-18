@@ -1,5 +1,0 @@
-Santiago,Chile
-Gran valparaiso,Chile
-Gran concepcion,Chile
-Gran la Serena,Chile
-Antofagasta,Chile

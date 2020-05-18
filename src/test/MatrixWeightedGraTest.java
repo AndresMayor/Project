@@ -32,7 +32,7 @@ class MatrixWeightedGraTest {
 			fail();
 		}
 		
-		Country v2 = new Country("Peru",1);
+		Country v2 = new Country("Peru",2);
 		WG.addVertex(v2);
 		
 		if(WG.getVertexSize() != 2) {
@@ -46,7 +46,7 @@ class MatrixWeightedGraTest {
 		
 		Country v1 = new Country("Peru",1);
 		WG.addVertex(v1);
-		Country v2 = new Country("Colombia",1);
+		Country v2 = new Country("Colombia",2);
 		WG.addVertex(v2);
 		
 		WG.addEdge(v1, v2, 5);
@@ -63,7 +63,7 @@ class MatrixWeightedGraTest {
 		
 		Country v1 = new Country("Colombia",1);
 		WG.addVertex(v1);
-		Country v2 = new Country("Chile",1);
+		Country v2 = new Country("Chile",2);
 		WG.addVertex(v2);
 		
 		WG.addEdge(v1, v2, 5);
@@ -84,7 +84,7 @@ class MatrixWeightedGraTest {
 		if(WG.getVertexSize() != 1) {
 			fail();
 		}
-		Country v2 = new Country("Colombia",1);
+		Country v2 = new Country("Colombia",2);
 		WG.addVertex(v2);
 		
 		WG.removeV(v1);

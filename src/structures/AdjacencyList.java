@@ -29,6 +29,7 @@ public class AdjacencyList <V> implements Graph<V> {
 		adjacencyList = new ArrayList<List<Duplex<V, Integer>>>();
 		vertices = new HashMap<V, Integer>();
 		weightedMatrix = new int[18][18];
+		invVertices = new HashMap<Integer, V>();
 	}
 	@Override
 	public boolean isDirected() {
@@ -70,7 +71,9 @@ public class AdjacencyList <V> implements Graph<V> {
 	@Override
 	public boolean addVertex(V v) {
 		vertices.put(v, vertices.size());
-		
+		invVertices.put(vertices.get(v), v);
+
+		adjacencyList.add(new ArrayList<Duplex<V, Integer>>());
 		return true;
 	}
 
@@ -92,19 +95,19 @@ public class AdjacencyList <V> implements Graph<V> {
 	}
 
 	@Override
-	public boolean addEdge(V u, V v) {
+	public boolean addEdge(V v, V u) {
 		int pos = vertices.get(v);
-		List<Duplex<V, Integer>> adj = adjacencyList.get(pos);
-		
-		adj.add(new Duplex<V, Integer>(u, null));
-		
-		if(!direct()) {
+		List<Duplex<V, Integer>> trans = adjacencyList.get(pos);
+
+		trans.add(new Duplex<V, Integer>(u, null));
+
+		if (!isDirected) {
 			pos = vertices.get(u);
-			adj = adjacencyList.get(pos);
-			
-			adj.add(new Duplex<V, Integer>(v, null));
+			trans = adjacencyList.get(pos);
+
+			trans.add(new Duplex<V, Integer>(v, null));
 		}
-		
+
 		return true;
 	}
 
@@ -190,6 +193,10 @@ public class AdjacencyList <V> implements Graph<V> {
 	public List<V> dfs(V v) {
 		// TODO Auto-generated method stub
 		return (vertices.size() != 0) ? Algorithms.dfs(this, invVertices.get(0)) : null;
+	}
+	public int[][] getWeight() {
+		// TODO Auto-generated method stub
+		return weightedMatrix;
 	}
 	
 }

@@ -1,0 +1,6 @@
+Colombia,caliente
+Argentina,frio
+Chile,frio
+Peru,caliente
+Costa Rica,caliente
+Brasil,caliente

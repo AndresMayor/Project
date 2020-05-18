@@ -17,6 +17,7 @@ public class Country {
 	public Country(String name, int id) {
 		this.name = name;
 		this.id = id;
+		cities = new ArrayList<City>();
 	}
 
 	/**
@@ -70,46 +71,17 @@ public class Country {
 		return "Name: "+name+", Id: "+id;
 	}
 	
-	public ArrayList<City> load(String path) {
-		cities = new ArrayList<>();
-		BufferedReader br = null;
-		FileReader fr = null;
-		try {
-			fr = new FileReader(path);
-			br = new BufferedReader(fr);
+	
 
-			String sCurrentLine;
-			int c = 0;
-			while ((sCurrentLine = br.readLine()) != null) {
-				String[] pieces = sCurrentLine.split(",");
-				City p = new City(pieces[0],pieces[1] , c);
-				cities.add(p);
-				c++;
-			}
-		} catch (IOException e) {
-			// e.printStackTrace();
-		} finally {
-			try {
-				if (br != null)
-					br.close();
-				if (fr != null)
-					fr.close();
-			} catch (IOException ex) {
-				ex.printStackTrace();
-			}
-		}
-		addVertex(cities, name);
-		return cities;
-	}
-
-	public void addVertex(ArrayList<City> cities, String nameCountry) {
+	public void addVertex(ArrayList<City> cities1, String nameCountry) {
+		cities = cities1;
 		graphCity = new AdjacencyList<>(false);
 		for (int i = 0; i < cities.size(); i++) {
 			graphCity.addVertex(cities.get(i));
 		}
 		String all = "";
 		if(nameCountry.equals("Colombia")) {
-			all = "Cali-Barranquilla,Cali-Medellin,Cali-Bogota,Barranquilla-Bogota,Barranquilla-Medellin,"+
+			all = "Cali-Medellin,Cali-Bogota,Barranquilla-Bogota,Barranquilla-Medellin,"+
 			"Barranquilla-Cartagena,Medellin-Bogota,Medellin-Cartagena";
 		}else if(nameCountry.equals("Argentina")) {
 			all = "Buenos aires-Cordoba,Buenos aires-La plata,Buenos aires-San miguel de tucuman,Cordoba-La plata,"+
@@ -118,13 +90,13 @@ public class Country {
 			all = "Santiago-Gran valparaiso,Santiago-Antofagasta,Santiago-Gran la serena,Gran valparaiso-Gran concepcion,"+
 			"Gran valparaiso-Antofagasta,Gran concepcion-Gran la serena";
 		}else if(nameCountry.equals("Peru")) {
-			all = "Iquitos-Lima,Iquitos-Arequipa,Iquitos-Puno,Cuzco-Lima,Cuzco-Puno,Arequipa-Puno,Arequipa-Lima,Puno-Lima";
+			all = "Iquitos-Lima,Iquitos-Arequipa,Iquitos-Puno,Cuzco-Lima,Cuzco-Puno,Arequipa-Puno,Arequipa-Lima";
 		}else if(nameCountry.equals("Brasil")) {
-			all = "Sao paulo-Rio de janeiro,Sao paulo-Brasilia,Sao paulo-Belo horizonte,Brasilia-Belo horizonte,"+
-			"Brasilia-Salvador de bahia,Brasilia-Rio de janeiro";
+			all = "Sao paulo-Rio de janeiro,Sao paulo-Brasilia,Sao paulo-Bello horizonte,Brasilia-Bello horizonte,"+
+			"Brasilia-Salvador de bahia,Brasilia-Rio de janeiro,Sao paulo-Salvador de bahia";
 		}else if(nameCountry.equals("Costa Rica")) {
 			all = "Heredia-Cartago,Heredia-Guanacaste,Heredia-Alajuela,Heredia-San jose,Cartago-Guanacaste"+
-			"San jose-Alajuela,San jose-Cartago";
+			"Cartago-San jose,Guanacaste-Alajuela";
 		}
 		
 		String[] relations = all.split(",");
@@ -132,13 +104,14 @@ public class Country {
 			String[] divide = relations[i].split("-");
 			int one = getIdCities(divide[0]);
 			int two = getIdCities(divide[1]);
-			graphCity.addEdge(cities.get(one), cities.get(two));
+			
+			graphCity.addEdge(cities.get(one), cities.get(two), (one+two));
 		}
 	}
 
 	public int getIdCities(String name) {
 		int id = -1;
-		for (int i = 0; i < cities.size(); i++) {
+		for (int i = 0; i < 5; i++) {
 			if (cities.get(i).getName().equals(name))
 				id = cities.get(i).getId();
 		}
